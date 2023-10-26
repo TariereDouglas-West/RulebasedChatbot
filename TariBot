@@ -1,1 +1,48 @@
+import random
 
+# Dictionary of jokes
+jokes = [
+    "Why don't scientists trust atoms? Because they make up everything!",
+    "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+    "Parallel lines have so much in common. Its a shame theyll never meet.",
+    "I'm reading a book on the history of glue. I just cant seem to put it down.",
+    "What's orange and sounds like a parrot? A carrot!",
+]
+
+# Function to greet the user
+def greet(name):
+    return f"Hello {name}, I am Taribot. How can I help human today?"
+
+# Function to tell a random joke
+def tell_joke():
+    return random.choice(jokes)
+
+# Main function to run the chatbot
+def main():
+    user_name = "Tari"  # Replace with the user's name
+    print(greet(user_name))
+
+    while True:
+        user_input = input("You: ")
+
+        if "joke" in user_input.lower():
+            print("Taribot:", tell_joke())
+        elif "bye" in user_input.lower() or "exit" in user_input.lower():
+            print("Taribot: Goodbye!")
+            break
+        else:
+            print("Taribot: Sorry, I didn't get that. Can you please try again?")
+
+if __name__ == "__main__":
+    main()
+    
+    
+taribot = ChatBot("Taribot", logic_adapters=[{'import_path': 'chatterbot.logic.BestMatch', 'default_response': 'I am sorry, but I do not understand.', 'maximum_similarity_threshold': 0.90 }])
+
+def custom_greeting():
+    return "Hello human, I am Taribot. I am new to this planet. How can I assist you?"
+
+taribot.greeting = custom_greeting
+
+response = taribot.get_response("Hello, how are you?")
+print(response)
